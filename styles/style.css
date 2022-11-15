@@ -15,6 +15,19 @@
     gap: 10px;
 }
 
+#trailer {
+    width: 100px;
+}
+
+#read-more {
+    width: 100px;
+}
+
+#add-bookmark {
+    width: 100px;
+}
+
+/* LOADER CSS */
 
 .loader {
     display: block;
@@ -53,5 +66,78 @@
 
     100% {
         background-image: linear-gradient(#FF3D00 20px, transparent 0), linear-gradient(#FF3D00 20px, transparent 0), linear-gradient(#FF3D00 20px, transparent 0), linear-gradient(#FF3D00 20px, transparent 0);
+    }
+}
+
+/* MODAL  WINDOW*/
+
+.modal-window {
+    width: 100% !important;
+    min-height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s linear;
+}
+
+.modal-window .modal-container {
+    width: 65%;
+    height: 70vh;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0px rgb(157, 157, 157);
+}
+
+.modal-hide {
+    transform: translateY(-200%);
+}
+
+#close {
+    cursor: pointer;
+    position: absolute;
+    z-index: 2222222222;
+}
+
+.animate {
+    animation: wiggle 2s linear infinite;
+}
+
+
+
+/* Keyframes */
+@keyframes wiggle {
+
+    0%,
+    7% {
+        transform: rotateZ(0);
+    }
+
+    15% {
+        transform: rotateZ(-15deg);
+    }
+
+    20% {
+        transform: rotateZ(10deg);
+    }
+
+    25% {
+        transform: rotateZ(-10deg);
+    }
+
+    30% {
+        transform: rotateZ(6deg);
+    }
+
+    35% {
+        transform: rotateZ(-4deg);
+    }
+
+    40%,
+    100% {
+        transform: rotateZ(0);
     }
 }
