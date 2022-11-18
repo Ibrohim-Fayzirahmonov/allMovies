@@ -244,27 +244,58 @@ window.addEventListener('click', (e) => {
 
 //  --------- BOOKMARK ---------------------------- //
 
-
 $(".wrapper").addEventListener("click", (e) => {
     if (e.target.classList.contains("btn-warning")) {
-        const idMovie = e.target.getAttribute("data-add");
-        addToBookmark(idMovie)
+       const idMovie = e.target.getAttribute("data-add");
+       addBookmark(idMovie)
     }
-});
-
-const bookmark = [];
-
-function addToBookmark(ID) {
-
+ });
+ 
+ 
+ function addBookmark(ID) {
+    const bookmark = JSON.parse(localStorage.getItem("bookmark"));
+ 
     const filmItem = AllMovies.filter((e) => {
-        return e.id == ID;
+       return e.id == ID;
     });
-
-
-    if (!bookmark.includes(filmItem[0])) {
-        bookmark.push(filmItem[0])
-    } else {
-        alert('You already added this movie')
+ 
+ 
+    if(!bookmark.includes(filmItem[0])){
+       bookmark.push(filmItem[0])
+    }else{
+       alert('You already added this')
     }
+ 
     localStorage.setItem('bookmark', JSON.stringify(bookmark))
-}
+    
+    renderBookmark(bookmark)
+ }
+ 
+ 
+ function renderBookmark(bookmarks){
+    $(".bookmark").innerHTML = null;
+ 
+       bookmarks.forEach(e => {
+          let div =  createElement("div", "p-1 d-flex align-items-center gap-3 rounded-2 border border-2 mb-0", `
+          <img width="50" height="50" src="${e.minIMG}" alt="Rasm">
+          <div>
+            <strong class=" m-0 mb-1 w-50">${e.title}</strong>
+           <p class="mb-1 w-50">${e.year}</p>
+           <button id="${e.id}" class="bookmark-btn">Remove</button>
+        </div>
+          `)
+ 
+             $(".bookmark").appendChild(div)
+       })
+ }
+ 
+ $(".bookmark").addEventListener("click", e => {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmark"))
+    bookmarks = bookmarks.filter(el => el.id != e.target.id)
+    localStorage.setItem('bookmark', JSON.stringify(bookmarks))
+    renderBookmark(bookmarks)
+ })
+ 
+ let bookmarks = JSON.parse(localStorage.getItem("bookmark"))
+ renderBookmark(bookmarks)
+ 
